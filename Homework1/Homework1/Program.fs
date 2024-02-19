@@ -1,4 +1,6 @@
-﻿let factorial x = 
+﻿module Homework1
+
+let factorial x = 
     let rec recfactorial x acc =
         if x = 1 then acc else recfactorial (x - 1) (x * acc)
     recfactorial x 1
