@@ -1,4 +1,4 @@
-name: C# build CI
+name: F# build CI
 on: [push, pull_request]
 jobs:
   build-Windows:
