@@ -1,12 +1,10 @@
 ﻿module Homework1
 
 let factorial x = 
-    if x < 0 then 
-        None
-    else
-        let rec recfactorial x acc =
-            if x = 1 then Some(acc) else recfactorial (x - 1) (x * acc)
-        recfactorial x 1
+    if x < 0 then None else
+    let rec recfactorial x acc =
+        if x = 1 then Some(acc) else recfactorial (x - 1) (x * acc)
+    recfactorial x 1
 
 let fibonacci n = 
     let rec recfibonacci n prev cur = 
@@ -25,15 +23,13 @@ let convertList list =
     recconvertList list []
 
 let buildPowersUpToNPlusM n m =
-    if n < 0 || m < 0 then
-        []
-    else
-        let rec listBuilder x acc =
-            if x = 0 then
-                acc
-            else
-                listBuilder (x - 1) (List.head acc / 2 :: acc) 
-        listBuilder m [pown 2 (n + m)]
+    if n < 0 || m < 0 then [] else
+    let rec listBuilder x acc =
+        if x = 0 then
+            acc
+        else
+            listBuilder (x - 1) (List.head acc / 2 :: acc) 
+    listBuilder m [pown 2 (n + m)]
 
 let findPosition list x = 
     let rec helper l x pos =
