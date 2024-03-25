@@ -1,4 +1,4 @@
-module Homework2.ParsingTree
+module Homework2.ParseTree
 
 type Operator =
     | Plus
