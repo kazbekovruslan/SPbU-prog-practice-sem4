@@ -1,0 +1,37 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+
+\begin{document}
+
+\section{Normalization}
+
+\begin{align*}
+& ((\lambda a. (\lambda b. b\ b)\ (\lambda b. b\ b))\ b)\ ((\lambda c. (c\ b)) (\lambda a. a))
+\rightarrow
+((\lambda b. b\ b)\ (\lambda b. b\ b))\ ((\lambda c. (c\ b)) (\lambda a. a)) 
+\rightarrow \\
+&((\lambda b. b\ b)\ (\lambda b. b\ b))\ ((\lambda c. (c\ b)) (\lambda a. a))
+\end{align*}
+
+Не приводится к нормальной форме.
+
+\section{S K K = I}
+
+\begin{align*}
+& S\ K\ K = (\lambda x\ y\ z.x\ z\ (y\ z))\ (\lambda x\ y. x)\ (\lambda x\ y. x)
+\rightarrow 
+(\lambda y\ z.(\lambda x\ y.x)\ z\ (y\ z))\ (\lambda x\ y. x)
+\rightarrow \\
+&(\lambda z.(\lambda x\ y.x)\ z\ ((\lambda x\ y.x)\ z))
+\rightarrow
+(\lambda z.(\lambda y.z)\ ((\lambda x\ y.x)\ z))
+\rightarrow
+(\lambda z.(\lambda y.z)\ (\lambda y.z))
+\rightarrow \\
+&(\lambda z.z) = I
+\end{align*}
+
+\end{document}
