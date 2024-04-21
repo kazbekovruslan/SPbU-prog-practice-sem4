@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Homework4", "Homework4\Homework4.fsproj", "{5666914E-B556-4522-AB46-A4A28958D2AD}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BracketSequence", "BracketSequence\BracketSequence.fsproj", "{86AB968D-4727-4A3C-8C37-F7C85D8C349C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BracketSequence.Tests", "BracketSequence.Tests\BracketSequence.Tests.fsproj", "{0AA34176-6DB9-4975-8534-D4B0DACD94D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5666914E-B556-4522-AB46-A4A28958D2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5666914E-B556-4522-AB46-A4A28958D2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5666914E-B556-4522-AB46-A4A28958D2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5666914E-B556-4522-AB46-A4A28958D2AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86AB968D-4727-4A3C-8C37-F7C85D8C349C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86AB968D-4727-4A3C-8C37-F7C85D8C349C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86AB968D-4727-4A3C-8C37-F7C85D8C349C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86AB968D-4727-4A3C-8C37-F7C85D8C349C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
