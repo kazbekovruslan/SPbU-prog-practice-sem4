@@ -7,6 +7,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BracketSequence", "BracketS
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BracketSequence.Tests", "BracketSequence.Tests\BracketSequence.Tests.fsproj", "{0AA34176-6DB9-4975-8534-D4B0DACD94D7}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PointFree", "PointFree\PointFree.fsproj", "{0B4A1F07-EA1A-4C41-81F1-AE9ECFE5A3A1}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PointFree.Tests", "PointFree.Tests\PointFree.Tests.fsproj", "{04319FEC-4CB0-4F3A-8D22-538C9411AE44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA34176-6DB9-4975-8534-D4B0DACD94D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B4A1F07-EA1A-4C41-81F1-AE9ECFE5A3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4A1F07-EA1A-4C41-81F1-AE9ECFE5A3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4A1F07-EA1A-4C41-81F1-AE9ECFE5A3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4A1F07-EA1A-4C41-81F1-AE9ECFE5A3A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
