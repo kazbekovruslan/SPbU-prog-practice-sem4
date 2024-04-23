@@ -11,6 +11,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PointFree", "PointFree\Poin
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PointFree.Tests", "PointFree.Tests\PointFree.Tests.fsproj", "{04319FEC-4CB0-4F3A-8D22-538C9411AE44}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PhoneBook", "PhoneBook\PhoneBook.fsproj", "{62DCC460-0259-4FE8-A200-B3E02E46F5E6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PhoneBook.Tests", "PhoneBook.Tests\PhoneBook.Tests.fsproj", "{5D1398AB-DEBE-4311-A87A-68E04B590F3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04319FEC-4CB0-4F3A-8D22-538C9411AE44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62DCC460-0259-4FE8-A200-B3E02E46F5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62DCC460-0259-4FE8-A200-B3E02E46F5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62DCC460-0259-4FE8-A200-B3E02E46F5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62DCC460-0259-4FE8-A200-B3E02E46F5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D1398AB-DEBE-4311-A87A-68E04B590F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D1398AB-DEBE-4311-A87A-68E04B590F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D1398AB-DEBE-4311-A87A-68E04B590F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D1398AB-DEBE-4311-A87A-68E04B590F3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
