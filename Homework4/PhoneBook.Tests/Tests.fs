@@ -53,7 +53,10 @@ let ``save phonebook to file`` () =
 
     let actual = System.IO.File.ReadAllText(filename)
 
-    actual |> should equal "John,1234\nJane,5678\n"
+    if System.Environment.OSVersion.Platform = System.PlatformID.Win32NT then
+        actual |> should equal "John,1234\r\nJane,5678\r\n"
+    else
+        actual |> should equal "John,1234\nJane,5678\n"
 
 [<Test>]
 let ``read phonebook from file`` () =
