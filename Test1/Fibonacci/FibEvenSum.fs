@@ -1,5 +1,6 @@
 ﻿module FibEvenSum
 
+// Calculates and returns the sum of even-valued Fibonacci numbers up to 1 million
 let fibEvenSum =
     let rec fib a b =
         seq {
