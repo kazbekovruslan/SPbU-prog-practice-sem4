@@ -24,7 +24,7 @@ let ``Right computation with positive precision should return right answer`` () 
             return a / b
         }
 
-    result - 0.048 |> abs |> should lessThan 0.0001
+    result |> should equal 0.048
 
 [<Test>]
 let ``Computation with negative precision should throw exception`` () =
