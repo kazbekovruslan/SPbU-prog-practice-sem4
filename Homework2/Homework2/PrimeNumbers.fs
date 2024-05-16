@@ -5,9 +5,10 @@ let isPrime number =
         false
     else
         let rec checker x =
-            if number % x <> 0 then checker (x + 1)
-            else if x < number then false
-            else true
+            if number % x <> 0 then
+                checker (x + 1)
+            else
+                not (x < number)
 
         checker 2
 

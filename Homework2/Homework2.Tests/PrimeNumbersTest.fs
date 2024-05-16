@@ -14,5 +14,5 @@ let testCases () =
 let generatePrimeNumbers = Seq.initInfinite (fun x -> x + 2) |> Seq.filter isPrime
 
 [<TestCaseSource(nameof (testCases))>]
-let isPrimeTest index expected =
-    generatePrimeNumbers |> Seq.take index |> Seq.toList |> should equal expected
+let isPrimeTest count expected =
+    generatePrimeNumbers |> Seq.take count |> Seq.toList |> should equal expected
