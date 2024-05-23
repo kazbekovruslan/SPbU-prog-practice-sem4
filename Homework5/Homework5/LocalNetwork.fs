@@ -45,29 +45,3 @@ type LocalNetwork(pcsDict: Dictionary<PC, PC list>) =
     member this.Run() =
         while this.GetInfectedPcsWithUninfectedNeighbours().Length > 0 do
             this.Step() |> ignore
-
-
-
-let windows = OS("Windows", 0.8)
-let linux = OS("Linux", 0.3)
-let macos = OS("macOS", 0.2)
-
-let pc1 = PC(windows, false)
-let pc2 = PC(linux, false)
-let pc3 = PC(macos, false)
-let pc4 = PC(windows, false)
-let pc5 = PC(linux, false)
-let pc6 = PC(linux, false)
-
-let net = new Dictionary<PC, PC list>()
-net.Add(pc1, [ pc2; pc3 ])
-net.Add(pc2, [ pc4 ])
-net.Add(pc3, [ pc5 ])
-net.Add(pc4, [ pc2 ])
-net.Add(pc5, [ pc3 ])
-net.Add(pc6, [])
-
-let network = LocalNetwork(net)
-
-pc1.IsInfected <- true
-network.Run()
