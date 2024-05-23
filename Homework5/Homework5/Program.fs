@@ -1,5 +1,9 @@
 ﻿module LocalNetwork
 
+
+open System.Collections.Generic
+
+
 type OS(name: string, infectionProbability: float) =
     member val Name = name with get
     member val InfectionProbability = infectionProbability with get
@@ -10,42 +14,37 @@ type PC(os: OS, isInfected: bool) =
     member val IsInfected = isInfected with get, set
 
 
-type LocalNetwork(pcs: PC array) =
-    let adjacencyMatrix = Array2D.zeroCreate pcs.Length pcs.Length
+type LocalNetwork(pcsDict: Dictionary<PC, PC list>) =
+    let pcs = pcsDict.Keys |> Seq.toList
 
-    member this.AddConnection(pc1: PC, pc2: PC) =
-        let index1 = Array.findIndex (fun p -> p = pc1) pcs
-        let index2 = Array.findIndex (fun p -> p = pc2) pcs
-        adjacencyMatrix.[index1, index2] <- 1
-        adjacencyMatrix.[index2, index1] <- 1
+    member private this.GetInfectedPcsWithUninfectedNeighbours() =
+        pcs
+        |> List.filter (fun pc -> pc.IsInfected && pcsDict[pc] |> List.exists (fun pc -> not pc.IsInfected))
 
     member private this.Step() =
-        let infectedPcs = pcs |> Array.filter (fun pc -> pc.IsInfected)
+        let infectedPcsWithUninfectedNeighbours =
+            this.GetInfectedPcsWithUninfectedNeighbours()
 
         let newlyInfectedPcs =
-            infectedPcs
-            |> Array.collect (fun pc ->
-                pcs
-                |> Array.indexed
-                |> Array.filter (fun (i, p) ->
-                    adjacencyMatrix.[Array.findIndex (fun p' -> p' = pc) pcs, i] = 1
-                    && not p.IsInfected)
-                |> Array.map (fun (i, p) ->
-                    if System.Random().NextDouble() < p.System.InfectionProbability then
-                        Some p
-                    else
-                        None)
-                |> Array.choose id)
+            infectedPcsWithUninfectedNeighbours
+            |> List.map (fun pc -> pcsDict[pc])
+            |> List.concat
+            |> List.map (fun pc ->
+                if System.Random().NextDouble() < pc.System.InfectionProbability then
+                    Some pc
+                else
+                    None)
+            |> List.choose id
 
         for pc in newlyInfectedPcs do
             pc.IsInfected <- true
 
         printfn "----------"
-        pcs |> Array.iter (fun pc -> printfn "  %s: %b" pc.System.Name pc.IsInfected)
+        pcs |> List.map (fun pc -> printfn "  %s: %b" pc.System.Name pc.IsInfected)
 
     member this.Run() =
-        while pcs |> Array.exists (fun pc -> not pc.IsInfected) do
-            this.Step()
+        while this.GetInfectedPcsWithUninfectedNeighbours().Length > 0 do
+            this.Step() |> ignore
 
 
 
@@ -58,13 +57,17 @@ let pc2 = PC(linux, false)
 let pc3 = PC(macos, false)
 let pc4 = PC(windows, false)
 let pc5 = PC(linux, false)
+let pc6 = PC(linux, false)
 
-let network = LocalNetwork([| pc1; pc2; pc3; pc4; pc5 |])
+let net = new Dictionary<PC, PC list>()
+net.Add(pc1, [ pc2; pc3 ])
+net.Add(pc2, [ pc4 ])
+net.Add(pc3, [ pc5 ])
+net.Add(pc4, [ pc2 ])
+net.Add(pc5, [ pc3 ])
+net.Add(pc6, [])
 
-network.AddConnection(pc1, pc2)
-network.AddConnection(pc1, pc3)
-network.AddConnection(pc2, pc4)
-network.AddConnection(pc3, pc5)
+let network = LocalNetwork(net)
 
 pc1.IsInfected <- true
 network.Run()
