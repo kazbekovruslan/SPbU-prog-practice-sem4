@@ -19,6 +19,6 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Homework7\Homework7.fsproj" />
+    <ProjectReference Include="..\MiniCrawler\MiniCrawler.fsproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-module Homework7.Tests
+module MiniCrawler.Tests
 
 open MiniCrawler
 open FsUnit
