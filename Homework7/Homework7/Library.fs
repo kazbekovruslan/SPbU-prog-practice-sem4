@@ -32,11 +32,12 @@ let downloadPages (url: string) =
                     return (link, html.Length)
                 })
 
-        return! Async.Parallel downloadTasks
+        let! results = Async.Parallel downloadTasks
+        return results |> List.ofArray
     }
 
-let printSizes (results: (string * int)[]) =
-    results |> Array.iter (fun (link, size) -> printfn "%s — %d" link size)
+let printSizes (results: (string * int) list) =
+    results |> List.iter (fun (link, size) -> printfn "%s — %d" link size)
 
 let downloadAndPrintSizes (url: string) =
     async {
