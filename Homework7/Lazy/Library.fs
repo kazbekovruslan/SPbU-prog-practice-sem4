@@ -1,7 +1,5 @@
 ﻿module Lazy
 
-open System
-
 type ILazy<'a> =
     abstract member Get: unit -> 'a
 
