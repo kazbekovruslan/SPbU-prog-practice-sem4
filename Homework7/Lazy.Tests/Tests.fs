@@ -1,11 +1,8 @@
 module Lazy.Tests
 
+open Lazy
 open NUnit.Framework
-
-[<SetUp>]
-let Setup () =
-    ()
+open FsUnit
 
 [<Test>]
-let Test1 () =
-    Assert.Pass()
+let Test1 () = Assert.Pass()
