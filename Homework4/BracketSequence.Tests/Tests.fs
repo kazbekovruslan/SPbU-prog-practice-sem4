@@ -16,7 +16,9 @@ let testCases () =
       "f(g{h]i)j", false
       "!@#$%^&*(){}[]", true
       "abc(def[ghi", false
-      "jkl)mno}pqr]", false ]
+      "jkl)mno}pqr]", false
+      "(", false
+      ")", false ]
     |> List.map (fun (input, expected) -> TestCaseData(input, expected))
 
 [<TestCaseSource(nameof (testCases))>]
