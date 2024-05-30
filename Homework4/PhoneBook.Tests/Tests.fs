@@ -22,6 +22,23 @@ let ``add entry to phonebook`` () =
           { Name = "Jane"; PhoneNumber = "5678" } ]
 
 [<Test>]
+let ``add entry with existing name to phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "5678" } ]
+
+    let newEntry = { Name = "Jane"; PhoneNumber = "9999" }
+
+    let actual = addEntry newEntry phonebook
+
+    actual
+    |> should
+        equal
+        [ { Name = "Jane"; PhoneNumber = "9999" }
+          { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "5678" } ]
+
+[<Test>]
 let ``find phone by name in phonebook`` () =
     let phonebook =
         [ { Name = "John"; PhoneNumber = "1234" }
@@ -29,7 +46,27 @@ let ``find phone by name in phonebook`` () =
 
     let actual = findPhoneByName "John" phonebook
 
-    actual |> should equal (Some { Name = "John"; PhoneNumber = "1234" })
+    actual |> should equal ([ { Name = "John"; PhoneNumber = "1234" } ])
+
+[<Test>]
+let ``find phone by existing name in phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "5678" } ]
+
+    let actual = findPhoneByName "John" phonebook
+
+    actual |> should equal ([ { Name = "John"; PhoneNumber = "1234" } ])
+
+[<Test>]
+let ``find phone by non existing name in phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "5678" } ]
+
+    let actual = findPhoneByName "Jack" phonebook
+
+    Assert.That(actual, Is.Empty)
 
 [<Test>]
 let ``find name by phone in phonebook`` () =
@@ -39,7 +76,28 @@ let ``find name by phone in phonebook`` () =
 
     let actual = findNameByPhone "5678" phonebook
 
-    actual |> should equal (Some { Name = "Jane"; PhoneNumber = "5678" })
+    actual |> should equal ([ { Name = "Jane"; PhoneNumber = "5678" } ])
+
+[<Test>]
+let ``find name by existing phone in phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "5678" } ]
+
+    let actual = findNameByPhone "5678" phonebook
+
+    actual |> should equal ([ { Name = "Jane"; PhoneNumber = "5678" } ])
+
+[<Test>]
+let ``find name by non existing phone in phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "5678" } ]
+
+    let actual = findNameByPhone "9999" phonebook
+
+    Assert.That(actual, Is.Empty)
+
 
 [<Test>]
 let ``save phonebook to file`` () =
