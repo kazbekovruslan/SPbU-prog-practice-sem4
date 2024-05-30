@@ -10,27 +10,28 @@
 
 \begin{align*}
 & ((\lambda a. (\lambda b. b\ b)\ (\lambda b. b\ b))\ b)\ ((\lambda c. (c\ b)) (\lambda a. a))
-\rightarrow
+\rightarrow_\beta
 ((\lambda b. b\ b)\ (\lambda b. b\ b))\ ((\lambda c. (c\ b)) (\lambda a. a)) 
-\rightarrow \\
+\rightarrow_\beta \\
 &((\lambda b. b\ b)\ (\lambda b. b\ b))\ ((\lambda c. (c\ b)) (\lambda a. a))
 \end{align*}
 
-Не приводится к нормальной форме.
+Нормальная стратегия не сработала $\Rightarrow$ 
+по теореме о нормализации (Карри) не приводится к нормальной форме.
 
 \section{S K K = I}
 
 \begin{align*}
 & S\ K\ K = (\lambda x\ y\ z.x\ z\ (y\ z))\ (\lambda x\ y. x)\ (\lambda x\ y. x)
-\rightarrow 
+\rightarrow_\beta
 (\lambda y\ z.(\lambda x\ y.x)\ z\ (y\ z))\ (\lambda x\ y. x)
-\rightarrow \\
+\rightarrow_\beta \\
 &(\lambda z.(\lambda x\ y.x)\ z\ ((\lambda x\ y.x)\ z))
-\rightarrow
+\rightarrow_\beta
 (\lambda z.(\lambda y.z)\ ((\lambda x\ y.x)\ z))
-\rightarrow
+\rightarrow_\beta
 (\lambda z.(\lambda y.z)\ (\lambda y.z))
-\rightarrow \\
+\rightarrow_\beta \\
 &(\lambda z.z) = I
 \end{align*}
 
