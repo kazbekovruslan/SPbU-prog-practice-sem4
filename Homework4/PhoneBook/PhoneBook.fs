@@ -5,10 +5,10 @@ type PhoneEntry = { Name: string; PhoneNumber: string }
 let addEntry (entry: PhoneEntry) (phonebook: PhoneEntry list) = entry :: phonebook
 
 let findPhoneByName (name: string) (phonebook: PhoneEntry list) =
-    phonebook |> List.tryFind (fun e -> e.Name = name)
+    phonebook |> List.filter (fun e -> e.Name = name)
 
 let findNameByPhone (phoneNumber: string) (phonebook: PhoneEntry list) =
-    phonebook |> List.tryFind (fun e -> e.PhoneNumber = phoneNumber)
+    phonebook |> List.filter (fun e -> e.PhoneNumber = phoneNumber)
 
 let saveToFile (filename: string) (phonebook: PhoneEntry list) =
     let data = phonebook |> List.map (fun e -> sprintf "%s,%s" e.Name e.PhoneNumber)

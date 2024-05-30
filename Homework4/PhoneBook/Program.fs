@@ -39,8 +39,10 @@ let rec loop phonebook =
         let name = System.Console.ReadLine().Trim()
 
         match findPhoneByName name phonebook with
-        | Some entry -> printf "Phone Number: %s\n" entry.PhoneNumber
-        | None -> printf "Name not found.\n"
+        | [] -> printf "Name not found.\n"
+        | listOfEntries ->
+            listOfEntries
+            |> List.iter (fun entry -> printfn "Phone Number: %s" entry.PhoneNumber)
 
         loop phonebook
     | "find name" ->
@@ -48,8 +50,10 @@ let rec loop phonebook =
         let phoneNumber = System.Console.ReadLine().Trim()
 
         match findNameByPhone phoneNumber phonebook with
-        | Some entry -> printf "Name: %s\n" entry.Name
-        | None -> printf "Phone number not found.\n"
+        | [] -> printf "Phone number not found.\n"
+        | listOfEntries ->
+            listOfEntries
+            |> List.iter (fun entry -> printfn "Phone Number: %s" entry.PhoneNumber)
 
         loop phonebook
     | "list" ->
