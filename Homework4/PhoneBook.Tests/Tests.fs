@@ -98,6 +98,33 @@ let ``find name by non existing phone in phonebook`` () =
 
     Assert.That(actual, Is.Empty)
 
+[<Test>]
+let ``find name by existing duplicate phone in phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "Jane"; PhoneNumber = "1234" } ]
+
+    let actual = findNameByPhone "1234" phonebook
+
+    actual
+    |> should
+        equal
+        ([ { Name = "John"; PhoneNumber = "1234" }
+           { Name = "Jane"; PhoneNumber = "1234" } ])
+
+[<Test>]
+let ``find phone by existing duplicate name in phonebook`` () =
+    let phonebook =
+        [ { Name = "John"; PhoneNumber = "1234" }
+          { Name = "John"; PhoneNumber = "5678" } ]
+
+    let actual = findPhoneByName "John" phonebook
+
+    actual
+    |> should
+        equal
+        ([ { Name = "John"; PhoneNumber = "1234" }
+           { Name = "John"; PhoneNumber = "5678" } ])
 
 [<Test>]
 let ``save phonebook to file`` () =
