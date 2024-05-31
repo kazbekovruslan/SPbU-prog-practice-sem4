@@ -60,7 +60,9 @@ type LockFreeLazy<'a>(supplier: unit -> 'a) =
                     | Some(Error ex) -> raise ex
                     | None -> result
                 with ex ->
-                    System.Threading.Interlocked.CompareExchange(&value, Some(Error ex), None)
-                    |> ignore
-
-                    raise ex
+                    match System.Threading.Interlocked.CompareExchange(&value, Some(Error ex), None) with
+                    | Some(Ok v) -> v
+                    | Some(Error ex) -> raise ex
+                    | None ->
+                        value <- Some(Error ex)
+                        raise ex
