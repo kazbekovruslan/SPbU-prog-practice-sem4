@@ -12,6 +12,10 @@ let lazyConstructors =
       (fun f -> LockFreeLazy f :> ILazy<obj>) ]
     |> List.map (fun f -> TestCaseData(f))
 
+let multiThreadLazyConstructors =
+    [ (fun f -> ThreadSafeLazy f :> ILazy<obj>)
+      (fun f -> LockFreeLazy f :> ILazy<obj>) ]
+    |> List.map (fun f -> TestCaseData(f))
 
 [<TestCaseSource(nameof lazyConstructors)>]
 let ``Value should compute only once`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
@@ -43,6 +47,22 @@ let ``Computed value should be same for several Gets`` (lazyConstructor: (unit -
 let ``Exception in supplier should be thrown`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
     let lazyObject = lazyConstructor (fun () -> raise (System.Exception()))
     Assert.Throws<System.Exception>(fun () -> lazyObject.Get() |> ignore) |> ignore
+
+
+[<TestCaseSource(nameof multiThreadLazyConstructors)>]
+let ``Multithread lazies should return same value`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
+    let supplier () = obj ()
+
+    let lazyObject = ThreadSafeLazy supplier :> obj ILazy
+
+    Seq.initInfinite (fun _ -> async { return lazyObject.Get() })
+    |> Seq.take 8
+    |> Async.Parallel
+    |> Async.RunSynchronously
+    |> Seq.distinct
+    |> Seq.length
+    |> should equal 1
+
 
 [<Test>]
 let ``Multithread lazy test`` () =
