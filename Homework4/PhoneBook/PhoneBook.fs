@@ -11,8 +11,8 @@ let findNameByPhone (phoneNumber: string) (phonebook: PhoneEntry list) =
     phonebook |> List.filter (fun e -> e.PhoneNumber = phoneNumber)
 
 let saveToFile (filename: string) (phonebook: PhoneEntry list) =
-    let data = phonebook |> List.map (fun e -> sprintf "%s,%s" e.Name e.PhoneNumber)
-    System.IO.File.WriteAllLines(filename, data)
+    let data = phonebook |> List.map (fun e -> sprintf "%s,%s\n" e.Name e.PhoneNumber)
+    System.IO.File.WriteAllText(filename, String.concat "" data)
 
 let readFromFile (filename: string) =
     try
