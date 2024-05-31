@@ -12,10 +12,6 @@ let lazyConstructors =
       (fun f -> LockFreeLazy f :> ILazy<obj>) ]
     |> List.map (fun f -> TestCaseData(f))
 
-let multiThreadLazyConstructors =
-    [ (fun f -> ThreadSafeLazy f :> ILazy<obj>)
-      (fun f -> LockFreeLazy f :> ILazy<obj>) ]
-    |> List.map (fun f -> TestCaseData(f))
 
 [<TestCaseSource(nameof lazyConstructors)>]
 let ``Value should compute only once`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
@@ -48,20 +44,22 @@ let ``Exception in supplier should be thrown`` (lazyConstructor: (unit -> obj) -
     let lazyObject = lazyConstructor (fun () -> raise (System.Exception()))
     Assert.Throws<System.Exception>(fun () -> lazyObject.Get() |> ignore) |> ignore
 
+[<Test>]
+let ``Multithread lazy test`` () =
+    let counter = ref 0
 
-[<TestCaseSource(nameof multiThreadLazyConstructors)>]
-let ``Multithread lazies test`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
-    let supplier () = obj ()
+    let supplier () =
+        System.Threading.Interlocked.Increment(counter) |> ignore
+        obj ()
 
-    let lazyObject = lazyConstructor supplier
-    let amountOfThreads = 8
+    let lazyObject = ThreadSafeLazy supplier :> obj ILazy
 
-    let tasksArray =
-        Seq.init amountOfThreads (fun _ -> async { return lazyObject.Get() })
-
-    tasksArray
+    Seq.initInfinite (fun _ -> async { return lazyObject.Get() })
+    |> Seq.take 8
     |> Async.Parallel
     |> Async.RunSynchronously
     |> Seq.distinct
     |> Seq.length
     |> should equal 1
+
+    counter.Value |> should equal 1
