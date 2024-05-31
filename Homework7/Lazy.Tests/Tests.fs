@@ -51,8 +51,7 @@ let ``Exception in supplier should be thrown`` (lazyConstructor: (unit -> obj) -
 
 [<TestCaseSource(nameof multiThreadLazyConstructors)>]
 let ``Multithread lazies test`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
-    let object = obj ()
-    let supplier () = object
+    let supplier () = obj ()
 
     let lazyObject = lazyConstructor supplier
     let amountOfThreads = 8
@@ -63,5 +62,6 @@ let ``Multithread lazies test`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
     tasksArray
     |> Async.Parallel
     |> Async.RunSynchronously
-    |> Seq.forall (fun x -> x = object)
-    |> should be True
+    |> Seq.distinct
+    |> Seq.length
+    |> should equal 1
