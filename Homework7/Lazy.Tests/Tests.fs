@@ -34,7 +34,7 @@ let ``Value should compute only once`` (lazyConstructor: (unit -> obj) -> ILazy<
 
 [<TestCaseSource(nameof lazyConstructors)>]
 let ``Computed value should be same for several Gets`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
-    let supplier () = 42 :> obj
+    let supplier () = obj ()
 
     let lazyObject = lazyConstructor supplier
     let firstCallValue = lazyObject.Get()
@@ -51,7 +51,8 @@ let ``Exception in supplier should be thrown`` (lazyConstructor: (unit -> obj) -
 
 [<TestCaseSource(nameof multiThreadLazyConstructors)>]
 let ``Multithread lazies test`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
-    let supplier () = 42 :> obj
+    let object = obj ()
+    let supplier () = object
 
     let lazyObject = lazyConstructor supplier
     let amountOfThreads = 8
@@ -62,5 +63,5 @@ let ``Multithread lazies test`` (lazyConstructor: (unit -> obj) -> ILazy<obj>) =
     tasksArray
     |> Async.Parallel
     |> Async.RunSynchronously
-    |> Seq.forall (fun object -> object = 42)
+    |> Seq.forall (fun x -> x = object)
     |> should be True
