@@ -5,7 +5,7 @@ open FsUnit
 open NUnit.Framework
 
 [<Test>]
-let ``extractLinks should test`` () =
+let ``extractLinks test`` () =
     let url = "https://example.com"
 
     async {
