@@ -3,12 +3,17 @@
 open System.Net.Http
 open System.Text.RegularExpressions
 
-let downloadPageAsync (url: string) =
+let downloadPageAsync (url: string, client: HttpClient) =
     async {
         try
-            use client = new HttpClient()
-            let! html = client.GetStringAsync(url) |> Async.AwaitTask
-            return html
+            let httpRequest = new HttpRequestMessage(HttpMethod.Get, url)
+
+            let! response =
+                client.SendAsync(httpRequest, System.Threading.CancellationToken.None)
+                |> Async.AwaitTask
+
+            let! content = response.Content.ReadAsStringAsync() |> Async.AwaitTask
+            return content
         with ex ->
             printfn "Failed to download %s: %s" url ex.Message
             return ""
@@ -19,16 +24,16 @@ let extractLinks (html: string) =
     let matches = Regex.Matches(html, pattern)
     [ for m in matches -> m.Groups.[2].Value ]
 
-let downloadPages (url: string) =
+let downloadPages (url: string, client: HttpClient) =
     async {
-        let! mainPageHtml = downloadPageAsync url
+        let! mainPageHtml = downloadPageAsync (url, client)
         let linksFromMainPage = extractLinks mainPageHtml
 
         let downloadTasks =
             linksFromMainPage
             |> List.map (fun link ->
                 async {
-                    let! html = downloadPageAsync link
+                    let! html = downloadPageAsync (link, client)
                     return (link, html.Length)
                 })
 
@@ -41,6 +46,7 @@ let printSizes (results: (string * int) list) =
 
 let downloadAndPrintSizes (url: string) =
     async {
-        let! results = downloadPages url
+        use client = new HttpClient()
+        let! results = downloadPages (url, client)
         printSizes results
     }
