@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{graphicx} 
+
+
+\title{Homework 8}
+\date{May 2024}
+
+\begin{document}
+
+    \maketitle
+
+    program ::= definition $\vert$ term $\vert$ definition program
+    
+    definition ::= "let" variable "=" term "\textbackslash n"
+
+    variable ::= letter $\vert$ variable letter-or-digit
+
+    term ::= application $\vert$ abstraction
+
+    application ::= atom $\vert$ application atom
+
+    atom ::= variable $\vert$ parenthesized-term
+
+    abstraction ::= "\textbackslash" parameters "." term
+
+    parameters ::= variable $\vert$ variable parameters
+
+    letter ::= "a" $\vert$ ... $\vert$ "z" $\vert$ "A" $\vert$ ... $\vert$ "Z"
+
+    digit ::= "0" $\vert$ ... $\vert$ "9"
+
+    character ::= letter $\vert$ digit
+
+    parenthesized-term ::= "(" term ")"
+    \newline
+
+    Example:
+
+    let I = \textbackslash x.x
+    \newline
+
+  program $\rightarrow$ definition 
+
+  $\rightarrow$ "let" variable "=" term "\textbackslash n"
+  
+  $\rightarrow$ "let" "I" "=" term "\textbackslash n"
+  
+  $\rightarrow$ "let" "I" "=" abstraction "\textbackslash n"
+  
+  $\rightarrow$ "let" "I" "=" "\textbackslash" parameters "." term "\textbackslash n" 
+  
+  $\rightarrow$ "let" "I" "=" "\textbackslash" variable "." term "\textbackslash n"  
+  
+  $\rightarrow$ "let" "I" "=" "\textbackslash" "x" "." term "\textbackslash n"  
+
+  $\rightarrow$ "let" "I" "=" "\textbackslash" "x" "." application "\textbackslash n"  
+  
+  $\rightarrow$ "let" "I" "=" "\textbackslash" "x" "." atom "\textbackslash n"  
+  
+  $\rightarrow$ "let" "I" "=" "\textbackslash" "x" "." variable "\textbackslash n"  
+  
+  $\rightarrow$ "let" "I" "=" "\textbackslash" "x" "." "x" "\textbackslash n"  
+
+
+\end{document}
